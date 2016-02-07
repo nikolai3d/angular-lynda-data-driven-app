@@ -2,6 +2,15 @@
 
   <div class="textintro">
     <h1>Add a meeting</h1>
-    <P>{{ message }} </P>
+    <P>Type a meeting name and hit +</P>
   </div>
+  
+  <form class="formgroup addmeeting cf" name="myMeetingsForm" ng-submit="addMeeting()" novalidate>
+    <div class="inputwrapper">
+      <input type="text" name="meetingname" placeholder="Meeting Name" ng-model="meetingname" ng-required="true">
+    </div>
+    
+    <button type="submit" class="btn" ng-disable="myMeetingsForm.$invalid">+</button>
+    
+  </form>
 </div><!-- meetings cf -->
