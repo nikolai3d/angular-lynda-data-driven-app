@@ -1,14 +1,17 @@
 <!doctype html>
 <html lang="en" ng-app="myApp">
+
 <head>
   <meta charset="UTF-8">
   <title>Angular Data-Driven Application</title>
   <meta name="viewport" content="width=device-width, user-scalable=no">
   <link href='https://fonts.googleapis.com/css?family=Lato:400,100,700,900' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="css/style.css">
+
   <script type="text/javascript" src="js/lib/angular/angular.min.js"></script>
   <script type="text/javascript" src="js/lib/angular/angular-route.min.js"></script>
   <script type="text/javascript" src="js/lib/angular/angular-animate.min.js"></script>
+
   <!-- From Firebase angular quickstart doc: https://www.firebase.com/docs/web/libraries/angular/quickstart.html -->
   <!-- Firebase -->
   <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
@@ -20,20 +23,23 @@
   <script type="text/javascript" src="js/controllers/registration.js"></script>
   <script type="text/javascript" src="js/controllers/success.js"></script>
 </head>
+
 <body>
-<header>
-  <nav class="cf" ng-include="'views/nav.html'">
-    
-  </nav>
-  
-</header>
-<div class="userinfo" ng-show="currentUser" ng-controller="RegistrationController">
-  <span class="userinfo"> Hi {{ currentUser.firstname }} </span>
-  <a ng-href="#/login" ng-click="logout()">Logout</a> <!-- since it's not inside ng-view, the routing does not bind controllers
+  <header>
+    <nav class="cf" ng-include="'views/nav.html'">
+
+    </nav>
+
+  </header>
+  <div class="userinfo" ng-show="currentUser" ng-controller="RegistrationController">
+    <span class="userinfo"> Hi {{ currentUser.firstname }} </span>
+    <a ng-href="#/login" ng-click="logout()">Logout</a>
+    <!-- since it's not inside ng-view, the routing does not bind controllers
   Hence, the ng-controller="RegistrationController" in the enclosing div -->
-</div>
-<div class="page" ng-view>
-  <main class="cf">{{ message }}</main>
-</div>
+  </div>
+  <div class="page" ng-view>
+    <main class="cf">{{ message }}</main>
+  </div>
 </body>
+
 </html>
