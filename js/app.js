@@ -1,5 +1,5 @@
 var gApp = angular.module('myApp', ['ngRoute', 'firebase'])
-    .constant('FIREBASE_URL', 'https://angreg-nikolai3d.firebaseio.com/');
+    .constant('FIREBASE_URL', 'https://angdata-nikolai3d.firebaseio.com/');
 
 //This entire block is for trapping the error condition, in case a route does not resolve.
 //We use it to detect unauthenticated attempts to access #/success.html route
