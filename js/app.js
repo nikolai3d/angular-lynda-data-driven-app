@@ -23,9 +23,9 @@ gApp.config(['$routeProvider', function($routeProvider) {
     }).when('/register', {
         templateUrl: 'views/register.html',
         controller: 'RegistrationController'
-    }).when('/success', {
-        templateUrl: 'views/success.html',
-        controller: 'SuccessController',
+    }).when('/meetings', {
+        templateUrl: 'views/meetings.html',
+        controller: 'MeetingsController',
         resolve: {
             //No idea how it works yet. Just does, for now... 
             currentAuth: function(Authentication) {

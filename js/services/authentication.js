@@ -26,6 +26,8 @@ gApp.factory('Authentication', ['$rootScope',
                 $rootScope.currentUser = userObj; //This is how the webpage is gonna know the user is logged in
             } else {
                 $rootScope.currentUser = "";
+                $rootScope.message = "";
+
             }
         });
 
@@ -37,13 +39,13 @@ gApp.factory('Authentication', ['$rootScope',
                 });
 
                 fbAuthPromise.then(function(fbUserReg) {
-                    //Redirection in case of success
-                    $location.path('/success');
+                    //Redirection in case of success, go to our actual app, Meetings.
+                    $location.path('/meetings');
                 }).catch(function(error) {
                     $rootScope.message = "AUTH Error: " + error.message;
                 });
 
-               // $rootScope.message = "Authenticating...";
+                $rootScope.message = "Authenticating...";
 
             }, //login
             
