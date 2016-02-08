@@ -1,3 +1,6 @@
+/*global gApp */
+/*global Firebase */
+
 gApp.controller('MeetingsController', ['$scope', '$rootScope', '$firebaseAuth', '$firebaseArray', 'FIREBASE_URL',
     function($scope, $rootScope, $firebaseAuth, $firebaseArray, FIREBASE_URL) {
 
@@ -17,7 +20,7 @@ gApp.controller('MeetingsController', ['$scope', '$rootScope', '$firebaseAuth', 
 
                 var updateMeetingCount = function(){
                     $rootScope.howManyMeetings = meetingsInfo.length;
-                }
+                };
 
                 var meetingsDataLoadedPromise = meetingsInfo.$loaded(); //promise which is 
                     //fulfilled whenever data arrives from the database;
@@ -42,8 +45,8 @@ gApp.controller('MeetingsController', ['$scope', '$rootScope', '$firebaseAuth', 
                 
                 $scope.deleteMeeting = function(iMeetingHash) {
                     meetingsInfo.$remove(iMeetingHash);
-                } //deleteMeeting
-            }; //User authenticated
+                }; //deleteMeeting
+            } //User authenticated
         }); //$onAuth
     } //Controller
 ]);

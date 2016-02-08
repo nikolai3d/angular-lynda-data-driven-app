@@ -1,3 +1,6 @@
+/*global gApp */
+/*global Firebase */
+
 gApp.controller('CheckInsController', [
     '$scope',
     '$rootScope',
@@ -13,7 +16,23 @@ gApp.controller('CheckInsController', [
         $routeParams,
         FIREBASE_URL) {
 
-        var fbRef = new Firebase(FIREBASE_URL);
-
+        $scope.whichMeeting = $routeParams.mId;
+        $scope.whichUser = $routeParams.uId;
+        
+        var fbMeetingRef = new Firebase(FIREBASE_URL + 'users/' + $scope.whichUser + '/meetings/' + 
+        $scope.whichMeeting + '/checkins');
+        
+        $scope.addCheckin = function() {
+            var checkinsInfo = $firebaseArray(fbMeetingRef);
+            var checkinEntry = {
+                firstname: $scope.user.firstname, 
+                lastname: $scope.user.lastname,
+                email: $scope.user.email,
+                data: Firebase.ServerValue.TIMESTAMP
+            }; //checkinEntry
+            
+            checkinsInfo.$add(checkinEntry);
+            
+        } //addCheckin
     } //Controller
 ]);
