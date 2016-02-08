@@ -23,6 +23,10 @@ gApp.controller('MeetingsController', ['$scope', '$rootScope', '$firebaseAuth', 
                     }); //promise, add done
 
                 }; //addMeeting
+                
+                $scope.deleteMeeting = function(iMeetingHash) {
+                    meetingsInfo.$remove(iMeetingHash);
+                } //deleteMeeting
             }; //User authenticated
         }); //$onAuth
     } //Controller

@@ -15,9 +15,13 @@
   </form>
 
   <h2>Your meetings</h2>
-  <div class="meeting" ng-repeat="(key, meeting) in ourMeetings">
+  <div class="meeting" ng-repeat="(meetingHash, meeting) in ourMeetings">
     <!-- ourMeetings is model generated in meetings controller -->
     <!-- it's a $firebaseArray reference, it's iterating over it and it's updating live. Pretty cool. -->
+
+    <button class="btn btn-delete tooltip" ng-click="deleteMeeting(meetingHash)">
+      <span>Delete this meeting</span>
+    </button>
     <span class="text">{{meeting.name}}</span>
   </div>
 
