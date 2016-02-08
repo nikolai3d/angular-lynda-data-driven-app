@@ -4,13 +4,22 @@
     <h1>Add a meeting</h1>
     <P>Type a meeting name and hit +</P>
   </div>
-  
+
   <form class="formgroup addmeeting cf" name="myMeetingsForm" ng-submit="addMeeting()" novalidate>
     <div class="inputwrapper">
       <input type="text" name="meetingname" placeholder="Meeting Name" ng-model="meetingname" ng-required="true">
     </div>
-    
+
     <button type="submit" class="btn" ng-disable="myMeetingsForm.$invalid">+</button>
-    
+
   </form>
-</div><!-- meetings cf -->
+
+  <h2>Your meetings</h2>
+  <div class="meeting" ng-repeat="(key, meeting) in ourMeetings">
+    <!-- ourMeetings is model generated in meetings controller -->
+    <!-- it's a $firebaseArray reference, it's iterating over it and it's updating live. Pretty cool. -->
+    <span class="text">{{meeting.name}}</span>
+  </div>
+
+</div>
+<!-- meetings cf -->

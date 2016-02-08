@@ -10,6 +10,8 @@ gApp.controller('MeetingsController', ['$scope', '$rootScope', '$firebaseAuth', 
 
                 var meetingsInfo = $firebaseArray(meetingsDBRef); //We'll push meeting info into this
 
+                $scope.ourMeetings = meetingsInfo;
+
                 $scope.addMeeting = function() { //Called from Add Meeting form's submit
                     var addMeetingPromise = meetingsInfo.$add({
                         name: $scope.meetingname,
