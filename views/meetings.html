@@ -18,6 +18,7 @@
   <div class="meeting" ng-repeat="(meetingHash, meeting) in ourMeetings">
     <!-- ourMeetings is model generated in meetings controller -->
     <!-- it's a $firebaseArray reference, it's iterating over it and it's updating live. Pretty cool. -->
+    <!-- This is FireBase feature called "three-way data binding". -->
 
     <button class="btn btn-delete tooltip" ng-click="deleteMeeting(meetingHash)">
       <span>Delete this meeting</span>
