@@ -4,6 +4,7 @@
 gApp.controller('CheckInsController', [
     '$scope',
     '$rootScope',
+    '$location',
     '$firebaseObject',
     '$firebaseArray',
     '$routeParams', //For URL parameters (extra data passed with checkins.html route) 
@@ -11,6 +12,7 @@ gApp.controller('CheckInsController', [
     function(
         $scope,
         $rootScope,
+        $location,
         $firebaseObject,
         $firebaseArray,
         $routeParams,
@@ -24,7 +26,8 @@ gApp.controller('CheckInsController', [
         
         var checkinsList = $firebaseArray(fbMeetingRef);
         
-        $scope.currentCheckins = checkinsList;
+        $scope.currentCheckins = checkinsList; //Because of three-way data binding, as users are checking in, 
+                                               //the list will update on everybody's screens (checkinslist.html)
         
         
         $scope.addCheckin = function() {
@@ -36,8 +39,11 @@ gApp.controller('CheckInsController', [
                 date: Firebase.ServerValue.TIMESTAMP
             }; //checkinEntry
             
-            checkinsInfo.$add(checkinEntry);
+            var checkinAddedPromise = checkinsInfo.$add(checkinEntry);
             
-        } //addCheckin
+            checkinAddedPromise.then(function(){
+                $location.path('/checkins/'+$scope.whichUser+'/'+$scope.whichMeeting+'/checkinslist');
+            }); //on checkin add send the user to the checkins list. 
+        }; //addCheckin
     } //Controller
 ]);
