@@ -98,18 +98,18 @@ gApp.controller('CheckInsController', [
 
             checkinsArray.$add(myData);
         }; //giveAward 
-        
+
         $scope.deleteAward = function(checkinID, awardKey) {
-                var fbCheckinAwardToDeleteRef = new Firebase(FIREBASE_URL +
+            var fbCheckinAwardToDeleteRef = new Firebase(FIREBASE_URL +
                 'users/' + $scope.whichUser +
                 '/meetings/' + $scope.whichMeeting +
-                '/checkins/' +checkinID + '/awards/'+awardKey);
-                
-                var fbCheckinAwardToDeleteRecord = $firebaseObject(fbCheckinAwardToDeleteRef);
-                
-                fbCheckinAwardToDeleteRecord.$remove(awardKey);
-                
-                
+                '/checkins/' + checkinID + '/awards/' + awardKey);
+
+            var fbCheckinAwardToDeleteRecord = $firebaseObject(fbCheckinAwardToDeleteRef);
+
+            fbCheckinAwardToDeleteRecord.$remove(awardKey);
+
+
         };
 
     } //Controller
