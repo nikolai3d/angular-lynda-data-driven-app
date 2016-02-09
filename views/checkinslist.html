@@ -34,7 +34,7 @@
     </div> <!-- Search form -->
 
     <ul class="userlist cf">
-        <li ng-repeat="checkin in currentCheckins | orderBy: sortOrder:sortDirection | filter: query">
+        <li ng-repeat="checkin in currentCheckins | orderBy: sortOrder:sortDirection | filter: { $id : randomRecordID, $: query }">
             <!-- Because of three-way data binding of 'currentCheckins' in checkins.js, 
      as users are checking in, the list will update on everybody's screens  -->
 

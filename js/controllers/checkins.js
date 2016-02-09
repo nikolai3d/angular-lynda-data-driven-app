@@ -33,6 +33,8 @@ gApp.controller('CheckInsController', [
         $scope.sortOrder = "date";
         $scope.sortDirection = null;
         $scope.query = "";
+        $scope.randomRecordID = "";
+        
 
         $scope.addCheckin = function() {
             var checkinsInfo = $firebaseArray(fbMeetingRef);
@@ -60,5 +62,15 @@ gApp.controller('CheckInsController', [
 
             fbRecord.$remove(id);
         }; //deleteCheckin
+        
+        $scope.pickRandom = function() {
+            var whichRecord = Math.round(Math.random()*(checkinsList.length - 1));
+            $scope.randomRecordID = checkinsList.$keyAt(whichRecord);
+        }; //pickRandom Pick the Winner!
+        
+        $scope.resetRandom = function() {
+            $scope.randomRecordID = "";
+        }; //resetRandom
+        
     } //Controller
 ]);
