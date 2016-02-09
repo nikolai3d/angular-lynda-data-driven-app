@@ -14,15 +14,17 @@
                 <option value="lastname">Last Name</option>;
                 <option value="date">Date</option>;
             </select>
-        </div> <!-- formgroup sortOrder -->
+        </div>
+        <!-- formgroup sortOrder -->
 
         <div class="formgroup">
             <input id="dirascending" type="radio" ng-model="sortDirection" name="direction">
             <label for="dirascending">Ascending</label>&nbsp;
             <input id="dirdescending" type="radio" ng-model="sortDirection" name="direction" value="reverse">
             <label for="dirdescending">Descending</label>
-        </div> <!-- formgroup sortDirection -->
-        
+        </div>
+        <!-- formgroup sortDirection -->
+
         <div ng-show="currentUser" class="buttons cf">
             <button ng-hide="randomRecordID" class="btn btn-pick" ng-click="pickRandom()">
                 Pick Random
@@ -31,7 +33,8 @@
                 Reset
             </button>
         </div>
-    </div> <!-- Search form -->
+    </div>
+    <!-- Search form -->
 
     <ul class="userlist cf">
         <li ng-class="checkin.userState" ng-repeat="checkin in currentCheckins | orderBy: sortOrder:sortDirection | filter: { $id : randomRecordID, $: query }">
@@ -45,8 +48,8 @@
                     <button class="btn btn-delete tooltip" ng-click="deleteCheckin(checkin.$id)">
                         <span>Delete this check-in</span>
                     </button>
-                    
-                    <button class="btn btn-love tooltip" ng-click="showLove(checkin)">
+
+                    <button class="btn btn-love tooltip" ng-click="awardFormToggle(checkin)">
                         <span>Award the user</span>
                     </button>
                 </div>
@@ -59,17 +62,30 @@
                 </div>
                 <!-- info -->
                 <div class="showcheckins" ng-show="checkin.show">
-                   <form name="awardForm" class="cf" ng-submit="giveAward(checkin, checkin.giftText)" novalidate>
-                    <input type="text" name="giftText" placeholder="What are you giving"
-                    ng-model="checkin.giftText" ng-required="true">
-                    
-                    </input>
-                    <button type="submit" class="btn" ng-disabled="awardForm.$invalid">+
-                        
-                    </button>
-                   </form> 
-                </div> <!-- Giving awards div -->
-                
+                    <form name="awardForm" class="cf" ng-submit="giveAward(checkin, checkin.giftText)" novalidate>
+                        <input type="text" name="giftText" placeholder="What are you giving" ng-model="checkin.giftText" ng-required="true">
+
+                        </input>
+                        <button type="submit" class="btn" ng-disabled="awardForm.$invalid">+</button>
+
+                        <ul class="awardslist cf">
+                            <li class="cf" ng-repeat="(awardKey, awardValue) in checkin.awards">
+                                <div class="award"> {{ awardValue.name }}
+                                    <div class="buttons" ng-show="currentUser">
+                                        <button class="btn btn-delete award tooltip" ng-click="deleteAward(checkin.$id, awardKey)">
+                                            <span>Delete this award</span>
+                                        </button>
+                                    </div>
+                                    <!-- Buttons! -->
+                                </div>
+                                <!-- Award -->
+                            </li>
+                        </ul>
+                        <!-- Awards list -->
+                    </form>
+                </div>
+                <!-- Giving awards div -->
+
             </div>
             <!-- checkin -->
         </li>

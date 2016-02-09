@@ -72,7 +72,7 @@ gApp.controller('CheckInsController', [
             $scope.randomRecordID = "";
         }; //resetRandom
 
-        $scope.showLove = function(myCheckin) {
+        $scope.awardFormToggle = function(myCheckin) {
             myCheckin.show = !myCheckin.show;
 
             if (myCheckin.userState == 'expanded') {
@@ -81,8 +81,35 @@ gApp.controller('CheckInsController', [
             else {
                 myCheckin.userState = 'expanded';
             } //This gets fed to list item's classes through ng-class directive.
+        }; //awardFormToggle
 
+        $scope.giveAward = function(myCheckin, myGift) {
+            var fbCheckinAwardsRef = new Firebase(FIREBASE_URL +
+                'users/' + $scope.whichUser +
+                '/meetings/' + $scope.whichMeeting +
+                '/checkins/' + myCheckin.$id + '/awards');
 
+            var checkinsArray = $firebaseArray(fbCheckinAwardsRef);
+
+            var myData = {
+                name: myGift,
+                date: Firebase.ServerValue.TIMESTAMP
+            };
+
+            checkinsArray.$add(myData);
+        }; //giveAward 
+        
+        $scope.deleteAward = function(checkinID, awardKey) {
+                var fbCheckinAwardToDeleteRef = new Firebase(FIREBASE_URL +
+                'users/' + $scope.whichUser +
+                '/meetings/' + $scope.whichMeeting +
+                '/checkins/' +checkinID + '/awards/'+awardKey);
+                
+                var fbCheckinAwardToDeleteRecord = $firebaseObject(fbCheckinAwardToDeleteRef);
+                
+                fbCheckinAwardToDeleteRecord.$remove(awardKey);
+                
+                
         };
 
     } //Controller
