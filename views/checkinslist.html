@@ -14,15 +14,24 @@
                 <option value="lastname">Last Name</option>;
                 <option value="date">Date</option>;
             </select>
-        </div>
+        </div> <!-- formgroup sortOrder -->
 
         <div class="formgroup">
             <input id="dirascending" type="radio" ng-model="sortDirection" name="direction">
             <label for="dirascending">Ascending</label>&nbsp;
             <input id="dirdescending" type="radio" ng-model="sortDirection" name="direction" value="reverse">
             <label for="dirdescending">Descending</label>
+        </div> <!-- formgroup sortDirection -->
+        
+        <div ng-show="currentUser" class="buttons cf">
+            <button ng-hide="randomRecordID" class="btn btn-pick" ng-click="pickRandom()">
+                Pick Random
+            </button>
+            <button ng-show="randomRecordID" class="btn btn-pick" ng-click="resetRandom()">
+                Reset
+            </button>
         </div>
-    </div>
+    </div> <!-- Search form -->
 
     <ul class="userlist cf">
         <li ng-repeat="checkin in currentCheckins | orderBy: sortOrder:sortDirection | filter: query">
