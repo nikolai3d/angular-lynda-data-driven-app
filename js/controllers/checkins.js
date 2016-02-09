@@ -30,6 +30,10 @@ gApp.controller('CheckInsController', [
         //the list will update on everybody's screens (checkinslist.html)
 
 
+        $scope.sortOrder = "date";
+        $scope.sortDirection = null;
+        $scope.query = "";
+
         $scope.addCheckin = function() {
             var checkinsInfo = $firebaseArray(fbMeetingRef);
             var checkinEntry = {

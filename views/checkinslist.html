@@ -6,10 +6,26 @@
     <div class="search cf">
         <h2>Search Checkins</h2>
         <input type="text" ng-model="query" placeholder="Search for users">
+
+        <div class="formgroup">
+            <span class="label">by: </span>
+            <select ng-model="sortOrder">
+                <option value="firstname">First Name</option>;
+                <option value="lastname">Last Name</option>;
+                <option value="date">Date</option>;
+            </select>
+        </div>
+
+        <div class="formgroup">
+            <input id="dirascending" type="radio" ng-model="sortDirection" name="direction">
+            <label for="dirascending">Ascending</label>&nbsp;
+            <input id="dirdescending" type="radio" ng-model="sortDirection" name="direction" value="reverse">
+            <label for="dirdescending">Descending</label>
+        </div>
     </div>
 
     <ul class="userlist cf">
-        <li ng-repeat="checkin in currentCheckins | filter: query">
+        <li ng-repeat="checkin in currentCheckins | orderBy: sortOrder:sortDirection | filter: query">
             <!-- Because of three-way data binding of 'currentCheckins' in checkins.js, 
      as users are checking in, the list will update on everybody's screens  -->
 
