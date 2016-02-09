@@ -22,13 +22,18 @@ gApp.controller('CheckInsController', [
         var fbMeetingRef = new Firebase(FIREBASE_URL + 'users/' + $scope.whichUser + '/meetings/' + 
         $scope.whichMeeting + '/checkins');
         
+        var checkinsList = $firebaseArray(fbMeetingRef);
+        
+        $scope.currentCheckins = checkinsList;
+        
+        
         $scope.addCheckin = function() {
             var checkinsInfo = $firebaseArray(fbMeetingRef);
             var checkinEntry = {
                 firstname: $scope.user.firstname, 
                 lastname: $scope.user.lastname,
                 email: $scope.user.email,
-                data: Firebase.ServerValue.TIMESTAMP
+                date: Firebase.ServerValue.TIMESTAMP
             }; //checkinEntry
             
             checkinsInfo.$add(checkinEntry);
