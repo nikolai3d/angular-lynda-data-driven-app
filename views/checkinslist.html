@@ -34,17 +34,19 @@
     </div> <!-- Search form -->
 
     <ul class="userlist cf">
-        <li ng-repeat="checkin in currentCheckins | orderBy: sortOrder:sortDirection | filter: { $id : randomRecordID, $: query }">
+        <li ng-class="checkin.userState" ng-repeat="checkin in currentCheckins | orderBy: sortOrder:sortDirection | filter: { $id : randomRecordID, $: query }">
             <!-- Because of three-way data binding of 'currentCheckins' in checkins.js, 
      as users are checking in, the list will update on everybody's screens  -->
 
+            <!-- ng-class="checkin.userState" will set the class as "expanded" 
+                  to a list item whenever a Award User button is toggled -->
             <div class="checkin">
                 <div class="buttons" ng-show="currentUser">
                     <button class="btn btn-delete tooltip" ng-click="deleteCheckin(checkin.$id)">
                         <span>Delete this check-in</span>
                     </button>
                     
-                    <button class="btn btn-love tooltip" ng-click="showLove(checkin.$id)">
+                    <button class="btn btn-love tooltip" ng-click="showLove(checkin)">
                         <span>Award the user</span>
                     </button>
                 </div>
@@ -56,6 +58,18 @@
                     <!-- date -->
                 </div>
                 <!-- info -->
+                <div class="showcheckins" ng-show="checkin.show">
+                   <form name="awardForm" class="cf" ng-submit="giveAward(checkin, checkin.giftText)" novalidate>
+                    <input type="text" name="giftText" placeholder="What are you giving"
+                    ng-model="checkin.giftText" ng-required="true">
+                    
+                    </input>
+                    <button type="submit" class="btn" ng-disabled="awardForm.$invalid">+
+                        
+                    </button>
+                   </form> 
+                </div> <!-- Giving awards div -->
+                
             </div>
             <!-- checkin -->
         </li>

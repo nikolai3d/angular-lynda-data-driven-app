@@ -34,7 +34,7 @@ gApp.controller('CheckInsController', [
         $scope.sortDirection = null;
         $scope.query = "";
         $scope.randomRecordID = "";
-        
+
 
         $scope.addCheckin = function() {
             var checkinsInfo = $firebaseArray(fbMeetingRef);
@@ -53,24 +53,37 @@ gApp.controller('CheckInsController', [
         }; //addCheckin
 
         $scope.deleteCheckin = function(id) {
-            var fbCheckinRef = new Firebase(FIREBASE_URL + 
-            'users/' + $scope.whichUser + 
-            '/meetings/' + $scope.whichMeeting + 
-            '/checkins/' + id);
+            var fbCheckinRef = new Firebase(FIREBASE_URL +
+                'users/' + $scope.whichUser +
+                '/meetings/' + $scope.whichMeeting +
+                '/checkins/' + id);
 
             var fbRecord = $firebaseObject(fbCheckinRef);
 
             fbRecord.$remove(id);
         }; //deleteCheckin
-        
+
         $scope.pickRandom = function() {
-            var whichRecord = Math.round(Math.random()*(checkinsList.length - 1));
+            var whichRecord = Math.round(Math.random() * (checkinsList.length - 1));
             $scope.randomRecordID = checkinsList.$keyAt(whichRecord);
         }; //pickRandom Pick the Winner!
-        
+
         $scope.resetRandom = function() {
             $scope.randomRecordID = "";
         }; //resetRandom
-        
+
+        $scope.showLove = function(myCheckin) {
+            myCheckin.show = !myCheckin.show;
+
+            if (myCheckin.userState == 'expanded') {
+                myCheckin.userState = '';
+            }
+            else {
+                myCheckin.userState = 'expanded';
+            } //This gets fed to list item's classes through ng-class directive.
+
+
+        };
+
     } //Controller
 ]);
